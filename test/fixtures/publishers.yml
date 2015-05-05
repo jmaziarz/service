@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  is_pioneer: false
+  is_elder: false
+  is_servant: false
+  is_inactive: false
+
+two:
+  is_pioneer: false
+  is_elder: false
+  is_servant: false
+  is_inactive: false
