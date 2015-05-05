@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505214154) do
+ActiveRecord::Schema.define(version: 20150505214725) do
 
   create_table "publishers", force: :cascade do |t|
     t.boolean  "is_pioneer"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20150505214154) do
     t.boolean  "is_inactive"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.string   "username"
+    t.string   "email"
+    t.string   "telephone"
+    t.boolean  "is_texting"
   end
 
 end
