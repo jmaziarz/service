@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505221218) do
+ActiveRecord::Schema.define(version: 20150506202117) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -34,6 +34,22 @@ ActiveRecord::Schema.define(version: 20150505221218) do
     t.string   "telephone"
     t.boolean  "is_texting"
     t.integer  "group_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string   "month"
+    t.string   "year"
+    t.integer  "books"
+    t.integer  "brochures"
+    t.integer  "magazines"
+    t.integer  "visits"
+    t.integer  "studies"
+    t.float    "hours"
+    t.boolean  "is_auxilliary_pioneer"
+    t.boolean  "is_recorded"
+    t.integer  "publisher_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
 end
