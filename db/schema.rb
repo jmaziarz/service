@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 20150506202117) do
   end
 
   create_table "publishers", force: :cascade do |t|
-    t.boolean  "is_pioneer"
-    t.boolean  "is_elder"
-    t.boolean  "is_servant"
-    t.boolean  "is_inactive"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "is_pioneer",  default: false
+    t.boolean  "is_elder",    default: false
+    t.boolean  "is_servant",  default: false
+    t.boolean  "is_inactive", default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "name"
     t.string   "username"
     t.string   "email"
@@ -39,17 +39,17 @@ ActiveRecord::Schema.define(version: 20150506202117) do
   create_table "reports", force: :cascade do |t|
     t.string   "month"
     t.string   "year"
-    t.integer  "books"
-    t.integer  "brochures"
-    t.integer  "magazines"
-    t.integer  "visits"
-    t.integer  "studies"
-    t.float    "hours"
-    t.boolean  "is_auxilliary_pioneer"
-    t.boolean  "is_recorded"
+    t.integer  "books",                 default: 0
+    t.integer  "brochures",             default: 0
+    t.integer  "magazines",             default: 0
+    t.integer  "visits",                default: 0
+    t.integer  "studies",               default: 0
+    t.float    "hours",                 default: 0.0
+    t.boolean  "is_auxilliary_pioneer", default: false
+    t.boolean  "is_recorded",           default: false
     t.integer  "publisher_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
 end
