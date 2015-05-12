@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506202117) do
+ActiveRecord::Schema.define(version: 20150511221937) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -28,7 +28,9 @@ ActiveRecord::Schema.define(version: 20150506202117) do
     t.boolean  "is_inactive", default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.string   "name"
+    t.string   "last_name"
+    t.string   "first_name"
+    t.string   "middle_name"
     t.string   "username"
     t.string   "email"
     t.string   "telephone"
@@ -37,8 +39,6 @@ ActiveRecord::Schema.define(version: 20150506202117) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.string   "month"
-    t.string   "year"
     t.integer  "books",                 default: 0
     t.integer  "brochures",             default: 0
     t.integer  "magazines",             default: 0
@@ -48,8 +48,10 @@ ActiveRecord::Schema.define(version: 20150506202117) do
     t.boolean  "is_auxilliary_pioneer", default: false
     t.boolean  "is_recorded",           default: false
     t.integer  "publisher_id"
+    t.date     "reported_at"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.string   "remarks"
   end
 
 end
