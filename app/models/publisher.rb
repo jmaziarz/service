@@ -9,4 +9,11 @@ class Publisher < ActiveRecord::Base
   scope :active, -> { where(is_inactive: false) }
   scope :appointed, -> { where("is_elder = ? or is_servant = ?", true, true) }
   scope :active_but_not_pioneers, -> { where("is_inactive = ? and is_pioneer = ?", false, false) }
+
+  # TODO: check for inactivity
+  # A publisher is inactive if they have not reported any hours in the past
+  # six months.
+  def active?
+    reports.order(id: :desc).limit(6).sum(:hours) > 0
+  end
 end
