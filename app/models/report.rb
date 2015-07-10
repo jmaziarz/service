@@ -26,7 +26,7 @@ class Report < ActiveRecord::Base
   end
 
   def self.by_publishers
-    where(is_auxilliary_pioneer: false).joins(:publisher).merge(Publisher.active_but_not_pioneers)
+    where(is_auxilliary_pioneer: false).joins(:publisher).merge(Publisher.not_pioneering)
   end
 
   def self.by_auxilliary_pioneers
