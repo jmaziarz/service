@@ -36,6 +36,11 @@ end
 
 date = Date.parse('2015-03-01')
 
+puts "Generating blank reports for #{date}"
+Publisher.active.each do |p|
+  p.reports.create!(created_at: date)
+end
+
 File.open("#{Rails.root}/db/seeds/reports-march-2015.csv") do |reports|
   reports.read.each_line do |report|
     last_name, first_name, middle_name, card, books, brochures, hours, magazines, visits, studies, remarks, aux = report.chomp.split(",")
@@ -43,7 +48,7 @@ File.open("#{Rails.root}/db/seeds/reports-march-2015.csv") do |reports|
     if aux.nil?
       aux = false
     end
-    
+
     if Publisher.exists?(last_name: last_name, first_name: first_name, middle_name: middle_name)
       publisher = Publisher.where(last_name: last_name, first_name: first_name, middle_name: middle_name).first
     else
@@ -51,16 +56,28 @@ File.open("#{Rails.root}/db/seeds/reports-march-2015.csv") do |reports|
       puts "Created new publisher: #{last_name}, #{first_name} #{middle_name}"
     end
 
-    if r = publisher.reports.create!(books: books, brochures: brochures, hours: hours, magazines: magazines, visits: visits, studies: studies, remarks: remarks, reported_at: date, is_auxilliary_pioneer: aux)
-      puts "Created report: #{r.reported_at} for #{publisher.last_name}, #{publisher.first_name} #{publisher.middle_name}"
+    if publisher.reports.by_month(date.month, date.year).exists?
+      r = publisher.reports.by_month(date.month, date.year).first
+      if r.update_attributes(books: books, brochures: brochures, hours: hours, magazines: magazines, visits: visits, studies: studies, remarks: remarks, reported_at: date, is_auxilliary_pioneer: aux)
+        puts "Updated report: #{r.reported_at} for #{publisher.last_name}, #{publisher.first_name} #{publisher.middle_name}"
+      end
+    else
+      puts "Couldn't find report."
     end
   end
+end
+
+date = Date.parse('2015-04-01')
+
+puts "Generating blank reports for #{date}"
+Publisher.active.each do |p|
+  p.reports.create!(created_at: date)
 end
 
 File.open("#{Rails.root}/db/seeds/reports-april-2015.csv") do |reports|
   reports.read.each_line do |report|
     last_name, first_name, middle_name, card, books, brochures, hours, magazines, visits, studies, remarks = report.chomp.split(",")
-    
+
     if Publisher.exists?(last_name: last_name, first_name: first_name, middle_name: middle_name)
       publisher = Publisher.where(last_name: last_name, first_name: first_name, middle_name: middle_name).first
     else
@@ -68,8 +85,13 @@ File.open("#{Rails.root}/db/seeds/reports-april-2015.csv") do |reports|
       puts "Created new publisher: #{last_name}, #{first_name} #{middle_name}"
     end
 
-    if r = publisher.reports.create!(books: books, brochures: brochures, hours: hours, magazines: magazines, visits: visits, studies: studies, remarks: remarks)
-      puts "Created report: #{r.reported_at} for #{publisher.last_name}, #{publisher.first_name} #{publisher.middle_name}"
+    if publisher.reports.by_month(date.month, date.year).exists?
+      r = publisher.reports.by_month(date.month, date.year).first
+      if r.update_attributes(books: books, brochures: brochures, hours: hours, magazines: magazines, visits: visits, studies: studies, remarks: remarks, created_at: date, reported_at: date)
+        puts "Updated report: #{r.reported_at} for #{publisher.last_name}, #{publisher.first_name} #{publisher.middle_name}"
+      end
+    else
+      puts "Couldn't find report."
     end
   end
 end

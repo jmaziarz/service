@@ -10,7 +10,7 @@ class CreateReports < ActiveRecord::Migration
       t.boolean :is_auxilliary_pioneer, default: false
       t.boolean :is_recorded, default: false
       t.references :publisher
-      t.date :reported_at
+      t.date :reported_at, default: nil
 
       t.timestamps null: false
     end

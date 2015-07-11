@@ -7,7 +7,15 @@ namespace :reminders do
       puts "  Sending email to assistant: #{g.assistant.email}"
       puts ""
 
-      g.reports.current.each do |r|
+      if g.reports.by_month(4).not_reported.count > 0
+        puts "  No reports for:"
+        g.reports.by_month(4).not_reported.each do |r|
+          puts "    * #{r.publisher.last_name}, #{r.publisher.first_name}"
+        end
+        puts ""
+      end
+
+      g.reports.by_month(4).each do |r|
         puts "  Report for #{r.publisher.last_name}, #{r.publisher.first_name}:"
         puts "    Remarks: #{r.remarks}"
         puts "    * Books: #{r.books}"

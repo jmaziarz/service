@@ -1,7 +1,7 @@
 class Report < ActiveRecord::Base
   belongs_to :publisher
 
-  before_create :set_default_reported_at
+  #before_create :set_default_reported_at
 
   def self.current
     if Date.current.day <= 20
@@ -15,14 +15,14 @@ class Report < ActiveRecord::Base
     date = Date.new(year)
     boy = date.beginning_of_year
     eoy = date.end_of_year
-    where("reported_at >= ? and reported_at <= ?", boy, eoy)
+    where("reports.created_at >= ? and reports.created_at <= ?", boy, eoy)
   end
 
   def self.by_month(month, year = Date.current.year)
     date = Date.new(year, month)
     bom = date.beginning_of_month
     eom = date.end_of_month
-    where("reported_at >= ? and reported_at <= ?", bom, eom)
+    where("reports.created_at >= ? and reports.created_at <= ?", bom, eom)
   end
 
   def self.by_publishers
@@ -35,6 +35,10 @@ class Report < ActiveRecord::Base
 
   def self.by_pioneers
     joins(:publisher).merge(Publisher.pioneers)
+  end
+
+  def self.not_reported
+    where(reported_at: nil)
   end
 
   private
