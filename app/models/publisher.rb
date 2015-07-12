@@ -2,6 +2,8 @@ class Publisher < ActiveRecord::Base
   has_many :reports
   belongs_to :group
 
+  validates :first_name, :last_name, presence: true
+
   scope :inactive, -> { where(is_inactive: true) }
   scope :active, -> { where(is_inactive: false) }
   scope :pioneers, -> { where(is_pioneer: true) }
