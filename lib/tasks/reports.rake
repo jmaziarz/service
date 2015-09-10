@@ -12,7 +12,7 @@ namespace :reports do
       puts "Group: #{g.name}"
       puts
       g.publishers.each do |p|
-        not_reported = p.reports.not_reported.pluck(:created_at)
+        not_reported = p.reports.not_reported.pluck(:report_for)
         unless not_reported.empty?
           not_reported.map! {|d| d.strftime("%Y-%m")}
           puts "  * #{p.last_name}, #{p.first_name} (#{not_reported.join(', ')})"
