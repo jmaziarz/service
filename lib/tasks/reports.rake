@@ -2,7 +2,7 @@ namespace :reports do
   desc 'Generate a blank report for each publisher for the current month'
   task generate: :environment do
     Publisher.active.each do |p|
-      p.reports.create!
+      p.reports.create!(report_for: Report.current_report_date)
     end
   end
 

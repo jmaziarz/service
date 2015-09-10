@@ -38,7 +38,7 @@ date = Date.parse('2015-03-01')
 
 puts "Generating blank reports for #{date}"
 Publisher.active.each do |p|
-  p.reports.create!(created_at: date)
+  p.reports.create!(report_for: date)
 end
 
 File.open("#{Rails.root}/db/seeds/reports-march-2015.csv") do |reports|
@@ -71,7 +71,7 @@ date = Date.parse('2015-04-01')
 
 puts "Generating blank reports for #{date}"
 Publisher.active.each do |p|
-  p.reports.create!(created_at: date)
+  p.reports.create!(report_for: date)
 end
 
 File.open("#{Rails.root}/db/seeds/reports-april-2015.csv") do |reports|

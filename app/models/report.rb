@@ -3,12 +3,16 @@ class Report < ActiveRecord::Base
 
   #before_create :set_default_reported_at
 
-  def self.current
+  def self.current_report_date
     if Date.current.day <= 20
-      by_month(Date.current.prev_month.month)
+      Date.current.prev_month.beginning_of_month
     else
-      by_month(Date.current.month)
+      Date.current.beginning_of_month
     end
+  end
+
+  def self.current
+    by_month(self.current_report_date.month)
   end
 
   def self.by_year(year)
