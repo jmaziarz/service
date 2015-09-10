@@ -13,16 +13,12 @@ class Report < ActiveRecord::Base
 
   def self.by_year(year)
     date = Date.new(year)
-    boy = date.beginning_of_year
-    eoy = date.end_of_year
-    where("reports.created_at >= ? and reports.created_at <= ?", boy, eoy)
+    where("reports.report_for >= ? and reports.report_for <= ?", date.beginning_of_year, date.end_of_year)
   end
 
   def self.by_month(month, year = Date.current.year)
     date = Date.new(year, month)
-    bom = date.beginning_of_month
-    eom = date.end_of_month
-    where("reports.created_at >= ? and reports.created_at <= ?", bom, eom)
+    where(report_for: date.beginning_of_month)
   end
 
   def self.by_publishers

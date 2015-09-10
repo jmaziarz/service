@@ -58,7 +58,7 @@ File.open("#{Rails.root}/db/seeds/reports-march-2015.csv") do |reports|
 
     if publisher.reports.by_month(date.month, date.year).exists?
       r = publisher.reports.by_month(date.month, date.year).first
-      if r.update_attributes(books: books, brochures: brochures, hours: hours, magazines: magazines, visits: visits, studies: studies, remarks: remarks, reported_at: date, is_auxilliary_pioneer: aux)
+      if r.update_attributes(books: books, brochures: brochures, hours: hours, magazines: magazines, visits: visits, studies: studies, remarks: remarks, report_for: date, reported_at: date, is_auxilliary_pioneer: aux)
         puts "Updated report: #{r.reported_at} for #{publisher.last_name}, #{publisher.first_name} #{publisher.middle_name}"
       end
     else
@@ -87,7 +87,7 @@ File.open("#{Rails.root}/db/seeds/reports-april-2015.csv") do |reports|
 
     if publisher.reports.by_month(date.month, date.year).exists?
       r = publisher.reports.by_month(date.month, date.year).first
-      if r.update_attributes(books: books, brochures: brochures, hours: hours, magazines: magazines, visits: visits, studies: studies, remarks: remarks, created_at: date, reported_at: date)
+      if r.update_attributes(books: books, brochures: brochures, hours: hours, magazines: magazines, visits: visits, studies: studies, remarks: remarks, created_at: date, report_for: date, reported_at: date)
         puts "Updated report: #{r.reported_at} for #{publisher.last_name}, #{publisher.first_name} #{publisher.middle_name}"
       end
     else
